@@ -44,6 +44,7 @@ namespace ConsoleApp_Async
                 ApplyJam(toast);
                 return toast;
             }
+
         }
 
         private static void ApplyJam(object toast)
