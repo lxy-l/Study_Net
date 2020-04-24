@@ -30,8 +30,5 @@ namespace ConsoleApp_IEnumerable
         }
     }
 
-    public static class Extensions
-    {
-        public static void Add(this Path path, double x, double y, double z) => path.Add(new Point3D(x, y, z));
-    }
+
 }
