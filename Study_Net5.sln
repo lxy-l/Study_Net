@@ -14,9 +14,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_IEnumerable", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_Type", "ConsoleApp_Type\ConsoleApp_Type.csproj", "{2A84E8C1-76D1-4BD9-8F5F-836F39CBD683}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_Lambda", "ConsoleApp_Lambda\ConsoleApp_Lambda.csproj", "{7217D142-0859-4CF0-B1EE-E603A28AF0E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_Lambda", "ConsoleApp_Lambda\ConsoleApp_Lambda.csproj", "{7217D142-0859-4CF0-B1EE-E603A28AF0E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_Async", "ConsoleApp_Async\ConsoleApp_Async.csproj", "{A500F175-3AE7-4FFA-AA99-1F1B49F8C9EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_Async", "ConsoleApp_Async\ConsoleApp_Async.csproj", "{A500F175-3AE7-4FFA-AA99-1F1B49F8C9EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_Task", "ConsoleApp_Task\ConsoleApp_Task.csproj", "{8F56EAB1-62DF-4D11-B0C9-12371A8AE085}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{A500F175-3AE7-4FFA-AA99-1F1B49F8C9EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A500F175-3AE7-4FFA-AA99-1F1B49F8C9EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A500F175-3AE7-4FFA-AA99-1F1B49F8C9EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F56EAB1-62DF-4D11-B0C9-12371A8AE085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F56EAB1-62DF-4D11-B0C9-12371A8AE085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F56EAB1-62DF-4D11-B0C9-12371A8AE085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F56EAB1-62DF-4D11-B0C9-12371A8AE085}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
