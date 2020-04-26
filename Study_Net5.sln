@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncFirstExampleCS", "Asyn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_AsyncFile", "ConsoleApp_AsyncFile\ConsoleApp_AsyncFile.csproj", "{6831397C-4577-441E-B9A8-89162B8AAF5C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_Attribute", "ConsoleApp_Attribute\ConsoleApp_Attribute.csproj", "{1D2810B2-E822-4C23-9E76-9F99C98B5686}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{6831397C-4577-441E-B9A8-89162B8AAF5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6831397C-4577-441E-B9A8-89162B8AAF5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6831397C-4577-441E-B9A8-89162B8AAF5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D2810B2-E822-4C23-9E76-9F99C98B5686}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D2810B2-E822-4C23-9E76-9F99C98B5686}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D2810B2-E822-4C23-9E76-9F99C98B5686}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D2810B2-E822-4C23-9E76-9F99C98B5686}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
