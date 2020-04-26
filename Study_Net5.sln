@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_Task", "ConsoleA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncFirstExampleCS", "Async_Sample__Asynchronous_Programming_with_Async_and_Await_in_C_\AsyncFirstExampleCS.csproj", "{96465EEC-7E28-41EF-99CE-658E47F6CA82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_AsyncFile", "ConsoleApp_AsyncFile\ConsoleApp_AsyncFile.csproj", "{6831397C-4577-441E-B9A8-89162B8AAF5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{96465EEC-7E28-41EF-99CE-658E47F6CA82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96465EEC-7E28-41EF-99CE-658E47F6CA82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96465EEC-7E28-41EF-99CE-658E47F6CA82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6831397C-4577-441E-B9A8-89162B8AAF5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6831397C-4577-441E-B9A8-89162B8AAF5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6831397C-4577-441E-B9A8-89162B8AAF5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6831397C-4577-441E-B9A8-89162B8AAF5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
