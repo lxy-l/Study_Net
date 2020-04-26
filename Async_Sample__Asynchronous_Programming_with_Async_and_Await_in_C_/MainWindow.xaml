@@ -1,0 +1,16 @@
+﻿<Window x:Class="AsyncFirstExample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Async Example" Height="350" Width="592">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="161*"/>
+            <ColumnDefinition Width="111*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="startButton" Content="Start&#xd;&#xa;" HorizontalAlignment="Left" Margin="167,10,0,0" VerticalAlignment="Top" Width="75" Height="24"  Click="StartButton_Click" Grid.Column="1" RenderTransformOrigin="-0.399,0.615"/>
+        <TextBox x:Name="resultsTextBox" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="576" Height="263" FontFamily="Lucida Console" FontSize="10" VerticalScrollBarVisibility="Visible" Grid.ColumnSpan="3"/>
+        <Button Content="Cancel" Grid.Column="1" HorizontalAlignment="Left" Margin="296,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="24" Width="78" Click="Button_Click"/>
+
+    </Grid>
+</Window>
