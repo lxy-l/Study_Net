@@ -41,7 +41,7 @@ namespace ConsoleApp_OOP
         public void SampleDelegate()
         {
             SampleDelegate sd = sampleMethod;
-            sd("Sample string");
+            sd();
         }
 
     }
