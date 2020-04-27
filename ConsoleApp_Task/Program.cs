@@ -29,7 +29,7 @@ namespace ConsoleApp_Task
     {
 
         static TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
-        static Random? rnd;
+        private static Random rnd;
         static async Task Main(string[] args)
         {
             tcs = new TaskCompletionSource<bool>(); 
@@ -60,7 +60,7 @@ namespace ConsoleApp_Task
 
             using var readStream = new StringReader(data);
 
-            string? line = await readStream.ReadLineAsync();
+            string line = await readStream.ReadLineAsync();
             while (line != null)
             {
                 var words = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
@@ -254,14 +254,14 @@ namespace ConsoleApp_Task
             Console.WriteLine($"\r\n\r\nTotal bytes returned:  {total}\r\n");
         }
 
-        private static void Button_Clicked_1(object? sender, EventArgs e)
+        private static void Button_Clicked_1(object sender, EventArgs e)
         {
             Console.WriteLine("   Handler 1 is starting...");
             Task.Delay(100).Wait();
             Console.WriteLine("   Handler 1 is done.");
         }
 
-        private static async void Button_Clicked_2_Async(object? sender, EventArgs e)
+        private static async void Button_Clicked_2_Async(object sender, EventArgs e)
         {
             Console.WriteLine("   Handler 2 is starting...");
             Task.Delay(100).Wait();
@@ -273,7 +273,7 @@ namespace ConsoleApp_Task
             tcs.SetResult(true);
         }
 
-        private static void Button_Clicked_3(object? sender, EventArgs e)
+        private static void Button_Clicked_3(object sender, EventArgs e)
         {
             Console.WriteLine("   Handler 3 is starting...");
             Task.Delay(100).Wait();
@@ -284,7 +284,7 @@ namespace ConsoleApp_Task
 
     public class NaiveButton
     {
-        public event EventHandler? Clicked;
+        public event EventHandler Clicked;
 
         public void Click()
         {
