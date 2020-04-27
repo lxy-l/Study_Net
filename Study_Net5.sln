@@ -26,11 +26,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_AsyncFile", "Con
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_Attribute", "ConsoleApp_Attribute\ConsoleApp_Attribute.csproj", "{1D2810B2-E822-4C23-9E76-9F99C98B5686}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_Collections", "ConsoleApp_Collections\ConsoleApp_Collections.csproj", "{B2A01630-FB41-41F5-B1D9-ED86FB912F5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_Collections", "ConsoleApp_Collections\ConsoleApp_Collections.csproj", "{B2A01630-FB41-41F5-B1D9-ED86FB912F5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_Expressions", "ConsoleApp_Expressions\ConsoleApp_Expressions.csproj", "{401D73DE-CD76-408A-8F44-909743A108D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_Expressions", "ConsoleApp_Expressions\ConsoleApp_Expressions.csproj", "{401D73DE-CD76-408A-8F44-909743A108D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_Linq", "ConsoleApp_Linq\ConsoleApp_Linq.csproj", "{23E1EF42-4E5D-4372-88CB-481A4E41220B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_Linq", "ConsoleApp_Linq\ConsoleApp_Linq.csproj", "{23E1EF42-4E5D-4372-88CB-481A4E41220B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_LinqToObject", "ConsoleApp_LinqToObject\ConsoleApp_LinqToObject.csproj", "{59DF8D6E-A4AD-40E7-8000-DC9B5AF8FFE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,6 +88,10 @@ Global
 		{23E1EF42-4E5D-4372-88CB-481A4E41220B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23E1EF42-4E5D-4372-88CB-481A4E41220B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23E1EF42-4E5D-4372-88CB-481A4E41220B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59DF8D6E-A4AD-40E7-8000-DC9B5AF8FFE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59DF8D6E-A4AD-40E7-8000-DC9B5AF8FFE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59DF8D6E-A4AD-40E7-8000-DC9B5AF8FFE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59DF8D6E-A4AD-40E7-8000-DC9B5AF8FFE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
