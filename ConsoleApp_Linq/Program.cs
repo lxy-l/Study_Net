@@ -10,6 +10,23 @@ namespace ConsoleApp_Linq
      SkipWhile	基于谓词函数跳过元素，直到元素不符合条件。
      Take	获取序列中指定位置之前的元素。
      TakeWhile	基于谓词函数获取元素，直到元素不符合条件。
+
+     DefaultIfEmpty	用默认值单一实例集合替换空集合。
+     Enumerable.Empty 返回一个空集合。
+     Enumerable.Range 生成包含数字序列的集合。
+     Enumerable.Repeat 生成包含一个重复值的集合。
+
+     ToLookup	根据键选择器函数将元素放入 Lookup<TKey,TElement>（一对多字典）。 此方法强制执行查询。
+     ToList	将集合转换为 List<T>。 此方法强制执行查询
+     ToArray	将集合转换为数组。 此方法强制执行查询。
+     ToDictionary	根据键选择器函数将元素放入 Dictionary<TKey,TValue>。 此方法强制执行查询。
+     
+     AsQueryable	将（泛型）IEnumerable 转换为（泛型）IQueryable。
+     AsEnumerable	返回类型化为 IEnumerable<T> 的输入。
+
+     OfType	根据其转换为指定类型的能力筛选值。
+     Cast	将集合中的元素转换为指定类型。
+     Concat	连接两个序列以组成一个序列。
      */
     class Program
     {
