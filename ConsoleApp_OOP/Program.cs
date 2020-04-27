@@ -8,9 +8,7 @@ namespace ConsoleApp_OOP
         static void Main(string[] args)
         {
             SampleClass sampleObject = new SampleClass();
-            // Set a property value.
             sampleObject.Sample = "Sample String";
-            // Call a method.
             sampleObject.sampleMethod(1);
             SampleGeneric<string> asdf = new SampleGeneric<string>();
             asdf.Field = "Sample string";
