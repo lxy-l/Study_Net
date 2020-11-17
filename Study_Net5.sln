@@ -32,13 +32,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_Expressions", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_Linq", "ConsoleApp_Linq\ConsoleApp_Linq.csproj", "{23E1EF42-4E5D-4372-88CB-481A4E41220B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_LinqToObject", "ConsoleApp_LinqToObject\ConsoleApp_LinqToObject.csproj", "{59DF8D6E-A4AD-40E7-8000-DC9B5AF8FFE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_LinqToObject", "ConsoleApp_LinqToObject\ConsoleApp_LinqToObject.csproj", "{59DF8D6E-A4AD-40E7-8000-DC9B5AF8FFE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_Reflection", "ConsoleApp_Reflection\ConsoleApp_Reflection.csproj", "{658676DC-0C45-435C-96C4-BDC1CECBE420}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_Reflection", "ConsoleApp_Reflection\ConsoleApp_Reflection.csproj", "{658676DC-0C45-435C-96C4-BDC1CECBE420}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_Serialization", "ConsoleApp_Serialization\ConsoleApp_Serialization.csproj", "{B0068E9E-899D-406D-8F49-977693F31CA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_Serialization", "ConsoleApp_Serialization\ConsoleApp_Serialization.csproj", "{B0068E9E-899D-406D-8F49-977693F31CA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_OOP", "ConsoleApp_OOP\ConsoleApp_OOP.csproj", "{88F204BB-DD52-4969-B726-296C6F62CE32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_OOP", "ConsoleApp_OOP\ConsoleApp_OOP.csproj", "{88F204BB-DD52-4969-B726-296C6F62CE32}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{A79DD425-4638-4085-876B-8C19AB39F6A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,6 +112,10 @@ Global
 		{88F204BB-DD52-4969-B726-296C6F62CE32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88F204BB-DD52-4969-B726-296C6F62CE32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88F204BB-DD52-4969-B726-296C6F62CE32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A79DD425-4638-4085-876B-8C19AB39F6A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A79DD425-4638-4085-876B-8C19AB39F6A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A79DD425-4638-4085-876B-8C19AB39F6A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A79DD425-4638-4085-876B-8C19AB39F6A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
