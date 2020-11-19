@@ -57,30 +57,16 @@ namespace WebApi.Controllers
             DateTime dateTime = DateTime.Now;
             DateTimeOffset dateTimeOffset =DateTimeOffset.Now;
             _ = LogA(ip).ConfigureAwait(false);
-            //_ = Task.Run(async () =>
-            //  {
-            //      Log2(ip);
-            //      _ = Log(ip);
-            //      await Task.Delay(1000);
-                  
-            //  });
             JsonResult jsonResult = new JsonResult(new { DateTime = dateTime, DateTimeOffset = dateTimeOffset });
-            return Ok(jsonResult);
+            jsonResult.StatusCode = 200;
+            return jsonResult;
         }
         private static async Task LogA(string ip)
         {
             //这个地方的await不会影响调用这个方法的阻塞
-
-            Console.WriteLine("异步B方法开始");
             await LogB(ip);
-            Console.WriteLine("异步B方法结束");
-
             await Task.Delay(1000);
             Console.WriteLine("异步A:"+ip);
-
-            Console.WriteLine("同步C方法开始");
-            LogC(ip);
-            Console.WriteLine("同步C方法结束");
         }
 
         private static async Task LogB(string ip)
