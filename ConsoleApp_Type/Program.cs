@@ -74,7 +74,7 @@ namespace ConsoleApp_Type
             bool eq = DateTime.Equals(nowtime, utctime);
 
             Console.WriteLine($"NowDateTime:{nowtime}\nUtcDateTime:{utctime};\nequals:{eq}");
-            Console.WriteLine(Daytime.GetTime().ToLocalTime());
+            //Console.WriteLine(Daytime.GetTime().ToLocalTime());
             Console.WriteLine("\n\n");
             #endregion
 
@@ -90,12 +90,10 @@ namespace ConsoleApp_Type
             Console.WriteLine(num2);
 
 
-            Values values = new Values("sdf","23er");
+            Values values = new Values("sdf", "23er");
             //values.FirstName = "Roy"; values.LastName = "Stewart";
             Console.WriteLine(values.FirstName);
             Console.WriteLine(values.ToString());
-
-
 
         }
 
