@@ -1,4 +1,6 @@
-﻿using System;
+﻿using System.Threading;
+using System.Diagnostics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -34,7 +36,7 @@ namespace ConsoleApp_IEnumerable
         }
 
         static int[,] array2Da = new int[3, 2] { { 1, 2 }, { 3, 4 }, { 5, 6 } };
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             //var startingDeck = (from s in Suits()/*.LogQuery("Suit Generation")*/
             //                    from r in Ranks()/*.LogQuery("Value Generation")*/
@@ -78,24 +80,31 @@ namespace ConsoleApp_IEnumerable
             //} while (!startingDeck.SequenceEquals(shuffle));
 
             //Console.WriteLine(times);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+            // await foreach (var number in GenerateSequence())
+            // {
+            //     Console.WriteLine(number);
+            // }
+            // stopwatch.Stop();
+            // System.Console.WriteLine(stopwatch.ElapsedMilliseconds);
+            // stopwatch.Restart();
+            foreach (var item in GenerateSequence2())
+            {
+                Console.WriteLine(item);
+            }
+            stopwatch.Stop();
+            System.Console.WriteLine(stopwatch.ElapsedMilliseconds);
+            // int num = Find(array2Da, x =>
+            //  {
+            //      return x > 3 && x < 5;
+            //  });
+            // Console.WriteLine(num);
+            // num = 666;
 
-
-            //await foreach (var number in GenerateSequence())
-            //{
-            //    Console.WriteLine(number);
-            //}
-
-
-            int num = Find(array2Da, x =>
-             {
-                 return x > 3 && x < 5;
-             });
-            Console.WriteLine(num);
-            num = 666;
-
-            ref var item = ref Find(array2Da,val=> val == 6);
-            Console.WriteLine(item);
-            item = 24;
+            // ref var item = ref Find(array2Da, val => val == 6);
+            // Console.WriteLine(item);
+            // item = 24;
         }
 
         public static async IAsyncEnumerable<int> GenerateSequence()
@@ -107,8 +116,17 @@ namespace ConsoleApp_IEnumerable
             }
         }
 
+        public static IEnumerable<int> GenerateSequence2()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                Thread.Sleep(100);
+                yield return i;
+            }
+        }
 
-        public static  ref int Find(int[,] matrix, Func<int, bool> predicate)
+
+        public static ref int Find(int[,] matrix, Func<int, bool> predicate)
         {
             for (int i = 0; i < matrix.GetLength(0); i++)
                 for (int j = 0; j < matrix.GetLength(1); j++)
