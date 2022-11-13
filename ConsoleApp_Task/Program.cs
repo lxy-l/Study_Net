@@ -13,14 +13,14 @@ namespace ConsoleApp_Task
      * 要将同步解决方案转换为异步解决方案，
      * 最佳着手点在 GetURLContents 中，因为对 HttpWebRequest 方法 GetResponse 的调用以及对 Stream 方法 CopyTo 的调用是应用程序访问 Web 的位置。 
      * 
-     * ValueTask<int> :Task 和 Task<TResult> 是引用类型，因此，性能关键路径中的内存分配会对性能产生负面影响，尤其当分配出现在紧凑循环中时。 支持通用返回类型意味着可返                  回轻量值类型（而不是引用类型），从而避免额外的内存分配。通过.Result属性获取结果
+     * ValueTask<int> :Task 和 Task<TResult> 是引用类型，因此，性能关键路径中的内存分配会对性能产生负面影响，尤其当分配出现在紧凑循环中时。 支持通用返回类型意味着可返回轻量值类型（而不是引用类型），从而避免额外的内存分配。通过.Result属性获取结果
      * 
      * IAsyncEnumerable<string：可等待异步流。 异步流提供了一种方法，来枚举在具有重复异步调用的块中生成元素时从流中读取的项。
      * 
-     * Void ：在异步事件处理程序中使用 void 返回类型，这需要 void 返回类型。 对于事件处理程序以外的不返回值的方法，应返回 Task，因为无法等待返回 void 的异步方法。 此类        方法的任何调用方都必须继续完成，而无需等待调用的异步方法完成。 调用方必须独立于异步方法生成的任何值或异常。
+     * Void ：在异步事件处理程序中使用 void 返回类型，这需要 void 返回类型。 对于事件处理程序以外的不返回值的方法，应返回 Task，因为无法等待返回 void 的异步方法。 此类方法的任何调用方都必须继续完成，而无需等待调用的异步方法完成。 调用方必须独立于异步方法生成的任何值或异常。
                返回 void 的异步方法的调用方无法捕获从该方法引发的异常，且此类未经处理的异常可能会导致应用程序故障。 如果返回 Task 或 Task<TResult> 的方法引发异常，则该异常存储在返回的任务中。 等待任务时，将重新引发异常。 因此，请确保可以产生异常的任何异步方法都具有返回类型 Task 或 Task<TResult>，并确保会等待对方法的调用。
      * 
-     * Task：不包含 return 语句的异步方法或包含不返回操作数的 return 语句的异步方法通常具有返回类型 Task。 如果此类方法同步运行，它们将返回 void。 如果在异步方法中使用       Task 返回类型，调用方法可以使用 await 运算符暂停调用方的完成，直至被调用的异步方法结束。
+     * Task：不包含 return 语句的异步方法或包含不返回操作数的 return 语句的异步方法通常具有返回类型 Task。 如果此类方法同步运行，它们将返回 void。 如果在异步方法中使用Task 返回类型，调用方法可以使用 await 运算符暂停调用方的完成，直至被调用的异步方法结束。
      * 
      * Task<TResult> ：返回类型用于某种异步方法，此异步方法包含 return (C#) 语句，其中操作数是 TResult。
      * FromResult 异步方法是返回字符串的操作的占位符。
@@ -193,8 +193,8 @@ namespace ConsoleApp_Task
         {
             var content = new MemoryStream();
 
-            var webReq = (HttpWebRequest)WebRequest.Create(url);
-            //这里将GetResponse()改成异步
+            var webReq = WebRequest.Create(url) as HttpWebRequest;
+            //这里将GetResponse()改成异步ßß
             //await 运算符将当前方法 GetURLContents 的执行挂起，直到完成等待的任务为止。(添加了 await 运算符，所以会发生编译器错误。 该运算符仅可在使用 async 修饰符标记的方法中使用。)
             //同时，控制权返回给当前方法的调用方。 
             //在此示例中，当前方法是 GetURLContents，调用方是 SumPageSizes。 任务完成时，承诺的 WebResponse 对象作为等待的任务的值生成，并分配给变量 response。
