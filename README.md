@@ -235,3 +235,289 @@ get 访问器对应于包含属性类型的返回值的无参数方法。 set �
 类似于字段和方法，C# 支持实例属性和静态属性。 静态属性使用静态修饰符进行声明，而实例属性则不使用静态修饰符进行声明。
 
 属性的访问器可以是虚的。 如果属性声明包含 virtual、abstract 或 override 修饰符，则适用于属性的访问器。
+
+## 记录 record
+C# 中的记录是一个类或结构，它为使用数据模型提供特定的语法和行为。
+### 何时使用记录
+在下列情况下，请考虑使用记录而不是类或结构：
+
+1. 你想要定义依赖值相等性的数据模型。
+2. 你想要定义对象不可变的类型。
+
+### 值相等性
+对记录来说，值相等性表示当类型匹配且所有属性和字段值都匹配时，记录类型的两个变量相等。 对于其他引用类型（例如类），相等性是指引用相等性。 也就是说，如果类的两个变量引用同一个对象，则这两个变量是相等的。 确定两个记录实例的相等性的方法和运算符使用值相等性。
+
+并非所有数据模型都适合使用值相等性。 例如，Entity Framework Core 依赖引用相等性，来确保它对概念上是一个实体的实体类型只使用一个实例。 因此，记录类型不适合用作 Entity Framework Core 中的实体类型。
+
+### 不可变性
+不可变类型会阻止你在对象实例化后更改该对象的任何属性或字段值。 如果你需要一个类型是线程安全的，或者需要哈希代码在哈希表中国能保持不变，那么不可变性很有用。 记录为创建和使用不可变类型提供了简洁的语法。
+
+不可变性并不适用于所有数据方案。 例如，Entity Framework Core 不支持通过不可变实体类型进行更新。
+
+### 记录与类和结构的区别
+声明和实例化类或结构时使用的语法与操作记录时的相同。 只是将 class 关键字替换为 record，或者使用 record struct 而不是 struct。 同样地，记录类支持相同的表示继承关系的语法。 记录与类的区别如下所示：
+
+可使用位置参数创建和实例化具有不可变属性的类型。
+在类中指示引用相等性或不相等的方法和运算符（例如 Object.Equals(Object) 和 ==）在记录中指示值相等性或不相等。
+可使用 with 表达式对不可变对象创建在所选属性中具有新值的副本。
+记录的 ToString 方法会创建一个格式字符串，它显示对象的类型名称及其所有公共属性的名称和值。
+记录可从另一个记录继承。 但记录不可从类继承，类也不可从记录继承。
+记录结构与结构的不同之处是，编译器合成了方法来确定相等性和 ToString。 编译器为位置记录结构合成 Deconstruct 方法。
+
+### 示例
+下面的示例定义了一个公共记录，它使用位置参数来声明和实例化记录。 然后，它会输出类型名称和属性值：
+```C#
+public record Person(string FirstName, string LastName);
+
+public static void Main()
+{
+    Person person = new("Nancy", "Davolio");
+    Console.WriteLine(person);
+    // output: Person { FirstName = Nancy, LastName = Davolio }
+}
+```
+下面的示例演示了记录中的值相等性：
+```C#
+public record Person(string FirstName, string LastName, string[] PhoneNumbers);
+
+public static void Main()
+{
+    var phoneNumbers = new string[2];
+    Person person1 = new("Nancy", "Davolio", phoneNumbers);
+    Person person2 = new("Nancy", "Davolio", phoneNumbers);
+    Console.WriteLine(person1 == person2); // output: True
+
+    person1.PhoneNumbers[0] = "555-1234";
+    Console.WriteLine(person1 == person2); // output: True
+
+    Console.WriteLine(ReferenceEquals(person1, person2)); // output: False
+}
+```
+下面的示例演示如何使用 with 表达式来复制不可变对象和更改其中的一个属性：
+```C#
+public record Person(string FirstName, string LastName)
+{
+    public string[] PhoneNumbers { get; init; }
+}
+
+public static void Main()
+{
+    Person person1 = new("Nancy", "Davolio") { PhoneNumbers = new string[1] };
+    Console.WriteLine(person1);
+    // output: Person { FirstName = Nancy, LastName = Davolio, PhoneNumbers = System.String[] }
+
+    Person person2 = person1 with { FirstName = "John" };
+    Console.WriteLine(person2);
+    // output: Person { FirstName = John, LastName = Davolio, PhoneNumbers = System.String[] }
+    Console.WriteLine(person1 == person2); // output: False
+
+    person2 = person1 with { PhoneNumbers = new string[1] };
+    Console.WriteLine(person2);
+    // output: Person { FirstName = Nancy, LastName = Davolio, PhoneNumbers = System.String[] }
+    Console.WriteLine(person1 == person2); // output: False
+
+    person2 = person1 with { };
+    Console.WriteLine(person1 == person2); // output: True
+}
+```
+
+## 模式匹配
+“模式匹配”是一种测试表达式是否具有特定特征的方法。 C# 模式匹配提供更简洁的语法，用于测试表达式并在表达式匹配时采取措施。 “is 表达式”目前支持通过模式匹配测试表达式并有条件地声明该表达式结果。 “switch 表达式”允许你根据表达式的首次匹配模式执行操作。 这两个表达式支持丰富的模式词汇。
+
+
+### Null 检查
+模式匹配最常见的方案之一是确保值不是 null。 使用以下示例进行 null 测试时，可以测试可为 null 的值类型并将其转换为其基础类型：
+
+```C#
+int? maybe = 12;
+
+if (maybe is int number)
+{
+    Console.WriteLine($"The nullable int 'maybe' has the value {number}");
+}
+else
+{
+    Console.WriteLine("The nullable int 'maybe' doesn't hold a value");
+}
+```
+上述代码是声明模式，用于测试变量类型并将其分配给新变量。 语言规则使此方法比其他方法更安全。 变量 number 仅在 if 子句的 true 部分可供访问和分配。 如果尝试在 else 子句或 if 程序块后等其他位置访问，编译器将出错。 其次，由于不使用 == 运算符，因此当类型重载 == 运算符时，此模式有效。 这使该方法成为检查空引用值的理想方法，可以添加 not 模式：
+
+```C#
+string? message = "This is not the null string";
+
+if (message is not null)
+{
+    Console.WriteLine(message);
+}
+```
+前面的示例使用常数模式将变量与 null 进行比较。 not 为一种逻辑模式，在否定模式不匹配时与该模式匹配。
+
+### 类型测试
+模式匹配的另一种常见用途是测试变量是否与给定类型匹配。 例如，以下代码测试变量是否为非 null 并实现 System.Collections.Generic.IList<T> 接口。 如果是，它将使用该列表中的 ICollection<T>.Count 属性来查找中间索引。 不管变量的编译时类型如何，声明模式均与 null 值不匹配。 除了防范未实现 IList 的类型之外，以下代码还可防范 null。
+
+```C#
+public static T MidPoint<T>(IEnumerable<T> sequence)
+{
+    if (sequence is IList<T> list)
+    {
+        return list[list.Count / 2];
+    }
+    else if (sequence is null)
+    {
+        throw new ArgumentNullException(nameof(sequence), "Sequence can't be null.");
+    }
+    else
+    {
+        int halfLength = sequence.Count() / 2 - 1;
+        if (halfLength < 0) halfLength = 0;
+        return sequence.Skip(halfLength).First();
+    }
+}
+```
+可在 switch 表达式中应用相同测试，用以测试多种不同类型的变量。 你可以根据特定运行时类型使用这些信息创建更好的算法。
+
+### 比较离散值
+你还可以通过测试变量找到特定值的匹配项。 在以下代码演示的示例中，你针对枚举中声明的所有可能值进行数值测试：
+
+```C#
+public State PerformOperation(Operation command) =>
+   command switch
+   {
+       Operation.SystemTest => RunDiagnostics(),
+       Operation.Start => StartSystem(),
+       Operation.Stop => StopSystem(),
+       Operation.Reset => ResetToReady(),
+       _ => throw new ArgumentException("Invalid enum value for command", nameof(command)),
+   };
+```
+前一个示例演示了基于枚举值的方法调度。 最终 _ 案例为与所有数值匹配的弃元模式。 它处理值与定义的 enum 值之一不匹配的任何错误条件。 如果省略开关臂，编译器会警告你尚未处理所有可能输入值。 在运行时，如果检查的对象与任何开关臂均不匹配，则 switch 表达式会引发异常。 可以使用数值常量代替枚举值集。 你还可以将这种类似的方法用于表示命令的常量字符串值：
+
+```C#
+public State PerformOperation(string command) =>
+   command switch
+   {
+       "SystemTest" => RunDiagnostics(),
+       "Start" => StartSystem(),
+       "Stop" => StopSystem(),
+       "Reset" => ResetToReady(),
+       _ => throw new ArgumentException("Invalid string value for command", nameof(command)),
+   };
+```
+前面的示例显示相同的算法，但使用字符串值代替枚举。 如果应用程序响应文本命令而不是常规数据格式，则可以使用此方案。 从 C# 11 开始，还可以使用 Span<char> 或 ReadOnlySpan<char> 来测试常量字符串值，如以下示例所示：
+
+```C#
+public State PerformOperation(ReadOnlySpan<char> command) =>
+   command switch
+   {
+       "SystemTest" => RunDiagnostics(),
+       "Start" => StartSystem(),
+       "Stop" => StopSystem(),
+       "Reset" => ResetToReady(),
+       _ => throw new ArgumentException("Invalid string value for command", nameof(command)),
+   };
+```
+在所有这些示例中，“弃元模式”可确保处理每个输入。 编译器可确保处理每个可能的输入值，为你提供帮助。
+
+### 关系模式
+你可以使用关系模式测试如何将数值与常量进行比较。 例如，以下代码基于华氏温度返回水源状态：
+
+```C#
+string WaterState(int tempInFahrenheit) =>
+    tempInFahrenheit switch
+    {
+        (> 32) and (< 212) => "liquid",
+        < 32 => "solid",
+        > 212 => "gas",
+        32 => "solid/liquid transition",
+        212 => "liquid / gas transition",
+    };
+```
+上述代码还演示了联合 and逻辑模式，用于检查两种关系模式是否匹配。 你还可以使用析取 or 模式检查模式匹配。 这两种关系模式括在括号中，可以在任何模式下用于清晰表述。 最后两个开关臂用于处理熔点和沸点的案例。 如果没有这两个开关臂，编译器将警告你的逻辑未涵盖每个可能的输入。
+
+上述代码还说明了编译器为模式匹配表达式提供的另一项重要功能：如果没有处理每个输入值，编译器会发出警告。 如果交换机 arm 已由先前的交换机 arm 处理，则编译器还会发出警告。 这使你能够随意重构和重新排列 switch 表达式。 编写同一表达式的另一种方法是：
+
+```C#
+string WaterState2(int tempInFahrenheit) =>
+    tempInFahrenheit switch
+    {
+        < 32 => "solid",
+        32 => "solid/liquid transition",
+        < 212 => "liquid",
+        212 => "liquid / gas transition",
+        _ => "gas",
+};
+```
+关于这一点和任何其他重构或重新排列的关键注意事项是，编译器会验证你已涵盖所有输入。
+
+### 多个输入
+到目前为止，你所看到的所有模式都在检查一个输入。 可以写入检查一个对象的多个属性的模式。 请考虑以下 Order 记录：
+
+```C#
+public record Order(int Items, decimal Cost);
+```
+前面的位置记录类型在显式位置声明两个成员。 首先出现 Items，然后是订单的 Cost。 有关详细信息，请参阅记录。
+
+以下代码检查项数和订单值以计算折扣价：
+
+```C#
+public decimal CalculateDiscount(Order order) =>
+    order switch
+    {
+        { Items: > 10, Cost: > 1000.00m } => 0.10m,
+        { Items: > 5, Cost: > 500.00m } => 0.05m,
+        { Cost: > 250.00m } => 0.02m,
+        null => throw new ArgumentNullException(nameof(order), "Can't calculate discount on null order"),
+        var someObject => 0m,
+    };
+```
+前两个开关臂检查 Order 的两个属性。 第三个仅检查成本。 下一个检查 null，最后一个与其他任何值匹配。 如果 Order 类型定义了适当的 Deconstruct 方法，则可以省略模式的属性名称，并使用析构检查属性：
+
+```C#
+public decimal CalculateDiscount(Order order) =>
+    order switch
+    {
+        ( > 10,  > 1000.00m) => 0.10m,
+        ( > 5, > 50.00m) => 0.05m,
+        { Cost: > 250.00m } => 0.02m,
+        null => throw new ArgumentNullException(nameof(order), "Can't calculate discount on null order"),
+        var someObject => 0m,
+    };
+```
+上述代码演示了位置模式，其中表达式的属性已析构。
+
+### 列表模式
+可以使用列表模式检查列表或数组中的元素。 列表模式提供了一种方法，将模式应用于序列的任何元素。 此外，还可以应用弃元模式 (_) 来匹配任何元素，或者应用切片模式来匹配零个或多个元素。
+
+当数据不遵循常规结构时，列表模式是一个有价值的工具。 可以使用模式匹配来测试数据的形状和值，而不是将其转换为一组对象。
+
+看看下面的内容，它摘录自一个包含银行交易信息的文本文件：
+```
+04-01-2020, DEPOSIT,    Initial deposit,            2250.00
+04-15-2020, DEPOSIT,    Refund,                      125.65
+04-18-2020, DEPOSIT,    Paycheck,                    825.65
+04-22-2020, WITHDRAWAL, Debit,           Groceries,  255.73
+05-01-2020, WITHDRAWAL, #1102,           Rent, apt, 2100.00
+05-02-2020, INTEREST,                                  0.65
+05-07-2020, WITHDRAWAL, Debit,           Movies,      12.57
+04-15-2020, FEE,                                       5.55
+```
+它是 CSV 格式，但某些行的列数比其他行要多。 对处理来说更糟糕的是，WITHDRAWAL 类型中的一列具有用户生成的文本，并且可以在文本中包含逗号。 一个包含弃元模式、常量模式和 var 模式的列表模式用于捕获这种格式的值处理数据：
+
+```C#
+decimal balance = 0m;
+foreach (string[] transaction in ReadRecords())
+{
+    balance += transaction switch
+    {
+        [_, "DEPOSIT", _, var amount]     => decimal.Parse(amount),
+        [_, "WITHDRAWAL", .., var amount] => -decimal.Parse(amount),
+        [_, "INTEREST", var amount]       => decimal.Parse(amount),
+        [_, "FEE", var fee]               => -decimal.Parse(fee),
+        _                                 => throw new InvalidOperationException($"Record {string.Join(", ", transaction)} is not in the expected format!"),
+    };
+    Console.WriteLine($"Record: {string.Join(", ", transaction)}, New balance: {balance:C}");
+}
+```
+前面的示例采用了字符串数组，其中每个元素都是行中的一个字段。 第二个字段的 switch 表达式键，用于确定交易的类型和剩余列数。 每一行都确保数据的格式正确。 弃元模式 (_) 跳过第一个字段，以及交易的日期。 第二个字段与交易的类型匹配。 其余元素匹配跳过包含金额的字段。 最终匹配使用 var 模式来捕获金额的字符串表示形式。 表达式计算要从余额中加上或减去的金额。
+
+列表模式可以在数据元素序列的形状上进行匹配。 使用弃元模式和切片模式来匹配元素的位置。 使用其他模式来匹配各个元素的特征。
