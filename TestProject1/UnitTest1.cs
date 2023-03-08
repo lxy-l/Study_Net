@@ -21,7 +21,7 @@ namespace TestProject1
         ///// 特性的方法中，你可以写一些在该测试项目的最后一个测试类结束后执行的代码，比如恢复系统设置，发送测试报告等。
         ///// </summary>
         //[AssemblyInitialize]
-        //public void AssemblyInit()
+        //public static void AssemblyInit()
         //{
 
         //}
@@ -30,7 +30,7 @@ namespace TestProject1
         ///// 
         ///// </summary>
         //[AssemblyCleanup]
-        //public void AssemblyClean()
+        //public static void AssemblyClean()
         //{
 
         //}
@@ -44,6 +44,7 @@ namespace TestProject1
         /// <summary>
         /// 特性的方法中，你可以写一些在该测试类的最后一个测试方法结束后执行的代码，比如关闭数据库连接，删除临时文件等。
         /// 一般用ClassCleanUp清理
+        /// 必须要是静态的
         /// </summary>
         [ClassCleanup]
         public static void ClassClean()
@@ -52,7 +53,7 @@ namespace TestProject1
         }
 
         [TestInitialize]
-        public void TestInit()
+        public static void TestInit()
         {
 
         }
@@ -61,7 +62,7 @@ namespace TestProject1
         /// 特性的方法中，你可以写一些在每个测试方法结束后执行的代码，比如释放资源，清理数据等。
         /// </summary>
         [TestCleanup]
-        public void TestClean()
+        public static void TestClean()
         {
 
         }
